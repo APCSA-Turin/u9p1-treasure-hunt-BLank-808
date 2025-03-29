@@ -2,24 +2,36 @@ package com.example.project;
 
 public class Sprite {
     private int x, y;
+    public String sprite;
 
+    public Sprite(int x, int y, String Sprite) {
+        this.x = x;
+        this.y = y;
+        sprite= Sprite;
+    }
     public Sprite(int x, int y) {
         this.x = x;
         this.y = y;
+        sprite= "Sprite";
     }
 
-    public int getX(){return 1;}//placeholder
-    public int getY(){return 1;}
+    public int getX(){return x;}//returns current x pos based on 2d arry not standard
+    public int getY(){return y;}
+    public String getSprite(){return sprite;}
 
-    public void setX(){}
-    public void setY(){}
+    public void setX(int X){
+        x=X;
+    }
+    public void setY(int Y){
+        y=Y;
+    }
 
     public String getCoords(){ //returns the coordinates of the sprite ->"(x,y)"
-        return "";
+        return "("+(x)+","+(y)+")";
     }
 
     public String getRowCol(int size){ //returns the row and column of the sprite -> "[row][col]"
-        return "[][]";
+        return "["+((size-1) -y)+"]["+(x)+"]";
     }
     
 

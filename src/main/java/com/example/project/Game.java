@@ -10,6 +10,12 @@ public class Game{
     private int size; 
 
     public Game(int size){ //the constructor should call initialize() and play()
+        this.size=size;
+        grid= new Grid(size);
+        player= new Player(0,0,grid);
+        initialize();
+        grid.placeSprite(player);
+       // play();
     }
 
     public static void clearScreen() { //do not modify
@@ -30,29 +36,33 @@ public class Game{
 
     public void play(){ //write your game logic here
         Scanner scanner = new Scanner(System.in);
+        boolean running=true;
 
-
-        while(true){
+        while(running){
             try {
-                Thread.sleep(100); // Wait for 1/10 seconds
+                Thread.sleep(10); // Wait for 1/100 second
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            clearScreen(); // Clear the screen at the beggining of the while loop
-
-     
+            grid.display();
+            System.out.println(player.getCoords());
+            String directions= (scanner.nextLine());
+            if(player.isValid(size, directions)){
+            player.move(directions);
+            if(grid.placeSprite(player, directions)){
+                    break;
             }
-            
-     
+        }
+            clearScreen(); // Clear the screen at the beggining of the while loop
+    }
     }
 
     public void initialize(){
-
-        //to test, create a player, trophy, grid, treasure, and enemies. Then call placeSprite() to put them on the grid
-   
+        grid.display();  
     }
 
     public static void main(String[] args) {
-        
+        Game g= new Game(10);
+        g.play();
     }
 }
